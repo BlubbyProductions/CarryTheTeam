@@ -8,7 +8,7 @@ public class Player_Controller : MonoBehaviour {
 	public float jumpHeight = 15.0f;
 	float dT; // deltaTime
 
-	Rigidbody2D rbplayer;
+	Rigidbody rbplayer;
 	public GameObject player;
 
 	// Use this for initialization
@@ -25,12 +25,10 @@ public class Player_Controller : MonoBehaviour {
 		if (Input.anyKey) {
 			switch (Input.inputString) {
 			case "a": // character moves left
-				//player.GetComponent<Rigidbody2D>().velocity = new Vector2 (-verticalSpeed * dT, 0.0f);
-				player.GetComponent<Rigidbody2D>().MovePosition(new Vector2(-verticalSpeed * dT, 0.0f));
+				player.GetComponent<Rigidbody>().velocity = new Vector3 (-verticalSpeed * dT, 0.0f, 0.0f);
 				break;
 			case "d": // character moves right
-				//player.GetComponent<Rigidbody2D>().velocity = new Vector2 (verticalSpeed * dT, 0.0f);
-				player.GetComponent<Rigidbody2D>().MovePosition(new Vector2(verticalSpeed * dT, 0.0f));
+				player.GetComponent<Rigidbody>().velocity = new Vector3 (verticalSpeed * dT, 0.0f, 0.0f);
 				break;
 			/*case "space":
 				player.GetComponent<Rigidbody2D> ().AddForce = new Vector2 (0.0f, jumpHeight * dT);
