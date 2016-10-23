@@ -370,8 +370,13 @@ GameObject:
   - 65: {fileID: 844851738}
   - 23: {fileID: 844851737}
   m_Layer: 0
+<<<<<<< HEAD
   m_Name: Wall 1
   m_TagString: Untagged
+=======
+  m_Name: Capsule
+  m_TagString: Player
+>>>>>>> 2b8322513023c1930ad13650671ab2edf53cd1fb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

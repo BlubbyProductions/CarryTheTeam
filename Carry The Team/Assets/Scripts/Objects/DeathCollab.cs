@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DeathPit : MonoBehaviour {
+public class DeathCollab : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -12,9 +12,18 @@ public class DeathPit : MonoBehaviour {
 	void Update () {
 	
 	}
+		
 
 	void OnTriggerEnter(Collider other)
 	{
-		Destroy(other.gameObject);
+		switch(gameObject.tag)
+		{
+			case "DeathBall":
+				Destroy (gameObject);
+				break;
+			default:
+				Destroy (other.gameObject);
+				break;
+		}
 	}
 }
