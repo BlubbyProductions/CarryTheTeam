@@ -6,7 +6,8 @@ public enum ControlState
 {
 	Sideways,
 	Updwards,
-	TopDown
+	TopDown,
+	Disabled
 }
 
 //public class PlayerController : NetworkBehaviour
@@ -48,6 +49,9 @@ public class PlayerController : MonoBehaviour
 		{
 			state = ControlState.TopDown;
 		}
+		else if(Input.GetKeyDown(KeyCode.Alpha0)) {
+			state = ControlState.Disabled;
+		}
 
 		switch (state)
 		{
@@ -60,7 +64,20 @@ public class PlayerController : MonoBehaviour
 		case ControlState.TopDown:
 			TopDownControls ();
 			break;
+		case ControlState.Disabled:
+			DisableControls ();
+			break;
 		}
+	}
+
+	public void SetControlState(ControlState SetState)
+	{
+		state = SetState;
+	}
+
+	void DisableControls() {
+		Movement = new Vector3 (0, 0, 0);
+		Player.Move (Movement * DeltaTime);
 	}
 
 	// movement in the x-axis
@@ -96,6 +113,12 @@ public class PlayerController : MonoBehaviour
 	// movement from above the player
 	void TopDownControls()
 	{
+		Horizontal = Input.GetAxis ("Horizontal");
+		Vertical = Input.GetAxis ("Vertical");
 
+		Movement.x = Horizontal * MoveSpeed;
+		Movement.z = Vertical * MoveSpeed;
+
+		Player.Move (Movement * DeltaTime);
 	}
 }
