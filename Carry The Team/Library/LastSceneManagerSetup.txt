@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Greenlight Go/Greenlight Go.unity
+- path: Assets/Scenes/Climb the Pole/Climb the Pole.unity
   isLoaded: 1
   isActive: 1
