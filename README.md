@@ -16,6 +16,6 @@ Brotome - Lead Artist
 
 NightyNightSky - Co-lead Artist
 
-Chris - General Game Programmer
+Animal - General Game Programmer
 
 Lyganesh - General/Network Programmer
