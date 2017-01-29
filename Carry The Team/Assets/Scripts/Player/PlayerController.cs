@@ -75,7 +75,13 @@ public class PlayerController : MonoBehaviour
 		state = SetState;
 	}
 
-	void DisableControls() {
+	public void MovePlayer(Vector3 OutsideMovement)
+	{
+		Player.Move (OutsideMovement * DeltaTime);
+	}
+
+	void DisableControls()
+	{
 		Movement = new Vector3 (0, 0, 0);
 		Player.Move (Movement * DeltaTime);
 	}

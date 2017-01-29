@@ -28,6 +28,7 @@ public class Stoplight_Behavior : MonoBehaviour
 	StopLight CurrentLight;
 	Renderer GreenLight;
 	Renderer RedLight;
+	PlayerController controls;
 	
 	void Start ()
 	{
@@ -38,27 +39,38 @@ public class Stoplight_Behavior : MonoBehaviour
 		MinRedlightDuration = 4;
 		MaxRedlightDuration = 8;
 
-		GameStart = true;
-
 		CurrentLight = StopLight.Redlight;
 
 		GreenLight = GameObject.Find ("Green Light").GetComponent<Renderer> ();
 		RedLight = GameObject.Find ("Red Light").GetComponent<Renderer> ();
 		GreenLight.material.color = new Color (0, 0, 0, 0);
+
+		controls = GameObject.FindObjectOfType (typeof(PlayerController)) as PlayerController;
+
+		GameStart = false;
+		controls.SetControlState (ControlState.Disabled);
 	}
 
 	void Update ()
 	{
-		// if there is a winner, end the game
-		// else if three minutes have passed and no winner, end the game
-
-		// on scene loaded
-		// start countdown
-		// once countdown reaches zero, start game
-
-		if (Time.time > ElapsedTime && GameStart)
+		// countdown timer to start the game
+		// start at 5 and decrease it every second
+		// 
+		if (Time.time < Init_Start_Time && Time.time > ElapsedTime)
 		{
-			if (CurrentLight == StopLight.Redlight) {
+			ElapsedTime++;
+			if (ElapsedTime == 5)
+			{
+				GameStart = true;
+				controls.SetControlState (ControlState.Sideways);
+				Debug.Log (GameStart);
+			}
+			//Debug.Log (Mathf.Abs(ElapsedTime));
+		}
+		else if (Time.time > ElapsedTime && GameStart)
+		{
+			if (CurrentLight == StopLight.Redlight)
+			{
 				CurrentLight = StopLight.Greenlight;
 			} 
 			else
@@ -87,14 +99,17 @@ public class Stoplight_Behavior : MonoBehaviour
 			break;
 		}
 
-		Debug.Log("Wait " + Mathf.Floor(WaitTimeForLightChange) + " seconds; Current light is " + CurrentLight);
+		//Debug.Log("Wait " + Mathf.Floor(WaitTimeForLightChange) + " seconds; Current light is " + CurrentLight);
 		ElapsedTime = Mathf.Floor(Time.time + WaitTimeForLightChange);
 	}
 
 	void CheckInput()
 	{
-		if (Input.GetAxis ("Horizontal") > 0 && CurrentLight == StopLight.Redlight) {
+		if (Input.GetAxis ("Horizontal") > 0 && CurrentLight == StopLight.Redlight && GameStart) {
 			Debug.Log ("Move back jerk");
+			controls.SetControlState (ControlState.Disabled);
+			controls.MovePlayer (new Vector3(-15, 0, 0));
+			controls.SetControlState (ControlState.Sideways);
 		}
 	}
 }

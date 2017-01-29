@@ -23,6 +23,8 @@ public class Winner_Trigger : MonoBehaviour
 	{
 		if (c.gameObject.CompareTag ("Player")) {
 			Debug.Log ("Winner");
+            gameObject.SendMessage("");
+			//controls.MovePlayer (new Vector3(-2, 0, 0));
 		}
 	}
 }
