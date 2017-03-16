@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Maze Runners.unity
+- path: Assets/Scenes/Free Falling.unity
   isLoaded: 1
   isActive: 1
